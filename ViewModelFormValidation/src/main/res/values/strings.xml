@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Android Samples</string>
+
+    <string name="first_name_hint">First name</string>
+    <string name="last_name_hint">Last name</string>
+    <string name="save_button">Save</string>
+    <string name="first_name_is_blank">Name must not be blank</string>
+    <string name="last_name_is_blank">Last name must not be blank</string>
+</resources>
