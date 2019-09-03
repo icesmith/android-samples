@@ -1,11 +1,11 @@
-package com.icesmith.androidsamples
+package com.icesmith.sample
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import com.icesmith.androidsamples.databinding.ActivityMainBinding
+import com.icesmith.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var model: MainVM

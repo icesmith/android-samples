@@ -1,4 +1,4 @@
-package com.icesmith.androidsamples
+package com.icesmith.sample
 
 import android.util.Log
 import androidx.lifecycle.*
