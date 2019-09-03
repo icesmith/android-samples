@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RetrofitSuspendingCallAdapter</string>
+    <string name="request_button">Execute</string>
+</resources>

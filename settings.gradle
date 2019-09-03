@@ -1,1 +1,1 @@
-include ':ViewModelFormValidation'
+include ':ViewModelFormValidation', ':RetrofitSuspendingCallAdapter'
