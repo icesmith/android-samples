@@ -6,24 +6,28 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Request
+import okhttp3.*
 import retrofit2.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import java.io.IOException
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-data class TestResponse(
-    @SerializedName("slideshow")
-    val slideshow: Any
+data class Bar(
+    @SerializedName("foo")
+    val foo: String
 )
 
 interface Service {
-    @GET("json")
-    @Headers("Cache-Control: no-cache")
-    suspend fun test(): Result<TestResponse>
+    @GET("bar")
+    suspend fun getBar(): Result<Bar>
+
+    @GET("bars")
+    suspend fun getBars(): Result<List<Bar>>
 }
 
 sealed class Result<out T> {
@@ -36,8 +40,8 @@ abstract class CallDelegate<TIn, TOut>(
     protected val proxy: Call<TIn>
 ) : Call<TOut> {
     override fun execute(): Response<TOut> = throw NotImplementedError()
-    override final fun enqueue(callback: Callback<TOut>) = enqueueImpl(callback)
-    override final fun clone(): Call<TOut> = cloneImpl()
+    final override fun enqueue(callback: Callback<TOut>) = enqueueImpl(callback)
+    final override fun clone(): Call<TOut> = cloneImpl()
 
     override fun cancel() = proxy.cancel()
     override fun request(): Request = proxy.request()
@@ -76,11 +80,11 @@ class ResultCall<T>(proxy: Call<T>) : CallDelegate<T, Result<T>>(proxy) {
     override fun cloneImpl() = ResultCall(proxy.clone())
 }
 
-class ResultAdapter<T>(
-    private val clazz: Class<T>
-): CallAdapter<T, Call<Result<T>>> {
-    override fun responseType() = clazz
-    override fun adapt(call: Call<T>): Call<Result<T>> = ResultCall(call)
+class ResultAdapter(
+    private val type: Type
+): CallAdapter<Type, Call<Result<Type>>> {
+    override fun responseType() = type
+    override fun adapt(call: Call<Type>): Call<Result<Type>> = ResultCall(call)
 }
 
 class MyCallAdapterFactory : CallAdapter.Factory() {
@@ -94,7 +98,7 @@ class MyCallAdapterFactory : CallAdapter.Factory() {
             when (getRawType(callType)) {
                 Result::class.java -> {
                     val resultType = getParameterUpperBound(0, callType as ParameterizedType)
-                    ResultAdapter(getRawType(resultType))
+                    ResultAdapter(resultType)
                 }
                 else -> null
             }
@@ -108,18 +112,56 @@ class MyCallAdapterFactory : CallAdapter.Factory() {
  * https://stackoverflow.com/q/57625272/4858777
  */
 class MainVM : ViewModel() {
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://httpbin.org/")
-        .addCallAdapterFactory(MyCallAdapterFactory())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    private val service: Service
 
-    private val service = retrofit.create(Service::class.java)
+    init {
+        val mockInterceptor = MockInterceptor()
+        val mockClient = OkHttpClient.Builder()
+            .addInterceptor(mockInterceptor)
+            .build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://mock.com/")
+            .client(mockClient)
+            .addCallAdapterFactory(MyCallAdapterFactory())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        service = retrofit.create(Service::class.java)
+    }
+
 
     fun executeRequest() {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = service.test()
-            Log.i("test", result.toString())
+            val bar = service.getBar()
+            Log.i("test", bar.toString())
+
+            val bars = service.getBars()
+            Log.i("test", bars.toString())
         }
+    }
+}
+
+/**
+ * A Mock interceptor that returns a test data
+ */
+class MockInterceptor : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
+        val response = when (chain.request().url().encodedPath()) {
+            "/bar" -> """{"foo":"baz"}"""
+            "/bars" -> """[{"foo":"baz1"},{"foo":"baz2"}]"""
+            else -> throw Error("unknown request")
+        }
+
+        val mediaType = MediaType.parse("application/json")
+        val responseBody = ResponseBody.create(mediaType, response)
+
+        return okhttp3.Response.Builder()
+            .protocol(Protocol.HTTP_1_0)
+            .request(chain.request())
+            .code(200)
+            .message("")
+            .body(responseBody)
+            .build()
     }
 }
