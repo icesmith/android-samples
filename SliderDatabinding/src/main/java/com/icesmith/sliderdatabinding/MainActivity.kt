@@ -1,4 +1,4 @@
-package com.icesmith.sample.sliderdatabinding
+package com.icesmith.sliderdatabinding
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import com.icesmith.sample.sliderdatabinding.databinding.ActivityMainBinding
+import com.icesmith.sliderdatabinding.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val model by viewModels<MainVM>()

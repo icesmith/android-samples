@@ -1,4 +1,4 @@
-package com.icesmith.sample
+package com.icesmith.viewmodelformvalidation
 
 import android.util.Log
 import androidx.lifecycle.*
@@ -12,7 +12,7 @@ data class User(
 )
 
 class MainVM : ViewModel() {
-    val userId = object: MutableLiveData<String>() {
+    private val userId = object: MutableLiveData<String>("my-user") {
         override fun setValue(value: String) {
             if (value != this.value) {
                 super.setValue(value)

@@ -3,7 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="model" type="com.icesmith.sample.sliderdatabinding.MainVM"/>
+        <variable name="model" type="com.icesmith.sliderdatabinding.MainVM"/>
     </data>
     <LinearLayout
         android:orientation="vertical"

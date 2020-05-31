@@ -1,4 +1,4 @@
-package com.icesmith.sample
+package com.icesmith.retrofitsuspendingcalladapter
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -58,7 +58,8 @@ class ResultCall<T>(proxy: Call<T>) : CallDelegate<T, Result<T>>(proxy) {
             val code = response.code()
             val result = if (code in 200 until 300) {
                 val body = response.body()
-                Result.Success(body)
+                val successResult:Result<T> = Result.Success(body)
+                successResult
             } else {
                 Result.Failure(code)
             }

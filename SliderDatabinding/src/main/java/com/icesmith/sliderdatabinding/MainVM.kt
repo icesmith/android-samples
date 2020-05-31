@@ -1,4 +1,4 @@
-package com.icesmith.sample.sliderdatabinding
+package com.icesmith.sliderdatabinding
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

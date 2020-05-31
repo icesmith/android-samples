@@ -1,26 +1,22 @@
-package com.icesmith.sample
+package com.icesmith.viewmodelformvalidation
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
-import com.icesmith.sample.databinding.ActivityMainBinding
+import com.icesmith.viewmodelformvalidation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var model: MainVM
+    private val model by viewModels<MainVM>()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        model = ViewModelProviders.of(this)[MainVM::class.java]
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
-        binding.model = model.apply {
-            userId.value = "my-user"
-        }
+        binding.model = model
     }
 
     fun onSaveButtonClick(@Suppress("UNUSED_PARAMETER") button: View) {

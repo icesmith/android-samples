@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="model" type="com.icesmith.sample.MainVM"/>
+        <variable name="model" type="com.icesmith.retrofitsuspendingcalladapter.MainVM"/>
     </data>
     <LinearLayout
             android:layout_width="match_parent"

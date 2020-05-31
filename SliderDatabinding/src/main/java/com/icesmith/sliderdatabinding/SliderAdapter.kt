@@ -1,4 +1,4 @@
-package com.icesmith.sample.sliderdatabinding
+package com.icesmith.sliderdatabinding
 
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
