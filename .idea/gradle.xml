@@ -12,6 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/RetrofitSuspendingCallAdapter" />
+            <option value="$PROJECT_DIR$/SliderDatabinding" />
             <option value="$PROJECT_DIR$/ViewModelFormValidation" />
           </set>
         </option>

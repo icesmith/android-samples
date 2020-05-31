@@ -1,1 +1,1 @@
-include ':ViewModelFormValidation', ':RetrofitSuspendingCallAdapter'
+include ':ViewModelFormValidation', ':RetrofitSuspendingCallAdapter', ':SliderDatabinding'
