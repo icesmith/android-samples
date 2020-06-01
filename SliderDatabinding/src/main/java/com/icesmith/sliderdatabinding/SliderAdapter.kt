@@ -5,15 +5,10 @@ import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import com.google.android.material.slider.Slider
 
-@BindingAdapter("sliderValue")
-fun setSliderValue(slider: Slider, value: Float) {
-    slider.value = value
-}
-
-@InverseBindingAdapter(attribute = "sliderValue")
+@InverseBindingAdapter(attribute = "value")
 fun getSliderValue(slider: Slider) = slider.value
 
-@BindingAdapter( "sliderValueAttrChanged")
+@BindingAdapter( "valueAttrChanged")
 fun setSliderListeners(slider: Slider, attrChange: InverseBindingListener) {
     slider.addOnChangeListener { _, _, _ ->
         attrChange.onChange()

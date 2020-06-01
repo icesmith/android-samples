@@ -19,6 +19,6 @@
             android:valueFrom="1"
             android:valueTo="20"
             android:stepSize="1"
-            app:sliderValue="@={model.count}" />
+            app:value="@={model.count}" />
     </LinearLayout>
 </layout>
