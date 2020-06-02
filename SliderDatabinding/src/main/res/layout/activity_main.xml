@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="model" type="com.icesmith.sliderdatabinding.MainVM"/>
     </data>
@@ -19,6 +18,6 @@
             android:valueFrom="1"
             android:valueTo="20"
             android:stepSize="1"
-            app:value="@={model.count}" />
+            android:value="@={model.count}" />
     </LinearLayout>
 </layout>
