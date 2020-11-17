@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fooListFragment">
+    <fragment
+        android:id="@+id/fooListFragment"
+        android:name="com.icesmith.recyclerviewcontainertransition.FooListFragment"
+        android:label="fragment_foo_list"
+        tools:layout="@layout/fragment_foo_list" >
+        <action
+            android:id="@+id/action_to_fooDetailsFragment"
+            app:destination="@id/fooDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fooDetailsFragment"
+        android:name="com.icesmith.recyclerviewcontainertransition.FooDetailsFragment"
+        android:label="fragment_foo_details"
+        tools:layout="@layout/fragment_foo_details" >
+        <argument
+            android:name="foo"
+            app:argType="com.icesmith.recyclerviewcontainertransition.Foo" />
+    </fragment>
+</navigation>

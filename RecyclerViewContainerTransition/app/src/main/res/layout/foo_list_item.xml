@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="foo" type="com.icesmith.recyclerviewcontainertransition.Foo" />
+        <variable name="listener" type="com.icesmith.recyclerviewcontainertransition.FooListener" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:transitionName="@{@string/foo_item_transition_name(foo.id)}"
+        android:onClick="@{(view) -> listener.onClick(foo, view)}">
+
+        <TextView
+            android:id="@+id/text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:text="@{foo.text}"
+            tools:text="Item 1" />
+
+    </FrameLayout>
+
+</layout>

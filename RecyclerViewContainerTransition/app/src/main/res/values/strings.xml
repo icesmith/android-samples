@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RecyclerViewContainerTransition</string>
+    <string name="foo_item_transition_name" translatable="false">foo_item_transition_%1$s</string>
+    <string name="foo_details_transition_name" translatable="false">foo_details_transition</string>
+</resources>
