@@ -20,20 +20,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            TagRow()
+            TagRow(sampleTags)
         }
     }
 }
 
 @Composable
-fun TagRow() {
+fun TagRow(tags: Collection<String>) {
     SimpleFlowRow(
         verticalGap = 8.dp,
         horizontalGap = 8.dp,
         alignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(16.dp)
     ) {
-        for (tag in sampleTags) {
+        for (tag in tags) {
             Text(
                 text = "#$tag",
                 maxLines = 1,
@@ -52,5 +52,5 @@ fun TagRow() {
 )
 @Composable
 fun TagRowPreview() {
-    TagRow()
+    TagRow(sampleTags)
 }
