@@ -1,6 +1,7 @@
 package com.icesmith.separatetoolbars
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,14 @@ class FirstFragment : Fragment() {
 
         val navController = findNavController()
         binding.toolbar.setupWithNavController(navController)
+
+        // An example of creating a menu programmatically.
+        // Take a look at SecondFragment.kt for an xml menu example.
+        val settingsMenuItem = binding.toolbar.menu.add(R.string.first_fragment_menu_settings)
+        settingsMenuItem.setOnMenuItemClickListener {
+            Log.i("test", "settings")
+            true
+        }
 
         binding.toSecondButton.setOnClickListener {
             navController.navigate(R.id.action_firstFragment_to_secondFragment)

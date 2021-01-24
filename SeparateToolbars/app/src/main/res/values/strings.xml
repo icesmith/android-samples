@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SeparateToolbars</string>
     <string name="first_fragment_title">First Fragment</string>
+    <string name="first_fragment_menu_settings">Settings</string>
     <string name="first_fragment_to_second_button">Next</string>
     <string name="second_fragment_title">Second Fragment</string>
     <string name="second_fragment_menu_edit">Edit</string>
