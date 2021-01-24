@@ -1,6 +1,7 @@
 package com.icesmith.separatetoolbars
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,5 +27,13 @@ class SecondFragment : Fragment() {
 
         val navController = findNavController()
         binding.toolbar.setupWithNavController(navController)
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.edit -> Log.i("test", "edit")
+                R.id.share -> Log.i("test", "share")
+            }
+
+            true
+        }
     }
 }
