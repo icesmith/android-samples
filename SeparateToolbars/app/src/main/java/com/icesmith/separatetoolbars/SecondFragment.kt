@@ -33,13 +33,19 @@ class SecondFragment : Fragment() {
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 // these ids should match item ids from second_fragment_menu.xml file
-                R.id.edit -> Log.i("test", "edit")
-                R.id.share -> Log.i("test", "share")
-            }
+                R.id.edit -> {
+                    Log.i("test", "edit")
 
-            // by returning 'true' we're saying that the event
-            // is handled and it shouldn't be propagated further
-            true
+                    // by returning 'true' we're saying that the event
+                    // is handled and it shouldn't be propagated further
+                    true
+                }
+                R.id.share -> {
+                    Log.i("test", "share")
+                    true
+                }
+                else -> false
+            }
         }
     }
 }
