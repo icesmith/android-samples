@@ -22,8 +22,8 @@ fun SimpleFlowRow(
     horizontalGap: Dp = 0.dp,
     content: @Composable () -> Unit
 ) = Layout(content, modifier) { measurables, constraints ->
-    val hGapPx = horizontalGap.toIntPx()
-    val vGapPx = verticalGap.toIntPx()
+    val hGapPx = horizontalGap.roundToPx()
+    val vGapPx = verticalGap.roundToPx()
 
     val rows = mutableListOf<MeasuredRow>()
     val itemConstraints = constraints.copy(minWidth = 0)
